@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Happy Customer Service Week – Edos Centre (v2)</title>
+<style>
+  :root{
+    --ink:#14102e; --ink2:#4a4568; --mute:#8a85a6;
+    --red:#f20c0c; --red-d:#c40808; --red-t:#fde8e8;
+    --lilac:#e9e4ff; --lilac2:#cfc6ff; --purple:#3b2a86;
+    --cream:#f6f3ee; --line:#e4dfd6; --green:#13a56b; --green-t:#dcf5ea;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1200px;height:1700px;font-family:'Inter','Liberation Sans',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  .poster{position:relative;width:1200px;height:1700px;overflow:hidden;background:var(--cream)}
+
+  /* subtle dot grid */
+  .dots{position:absolute;inset:0;background-image:radial-gradient(#d8d2c6 1.4px,transparent 1.6px);background-size:32px 32px;opacity:.7;
+        -webkit-mask-image:linear-gradient(180deg,#000 0,#000 40%,transparent 75%)}
+
+  /* header */
+  .head{position:absolute;left:64px;right:64px;top:52px;display:flex;align-items:center;justify-content:space-between}
+  .head img{height:78px;display:block}
+  .chip{font-size:15px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;border:1.5px solid var(--ink);border-radius:40px;padding:11px 20px;display:flex;align-items:center;gap:10px}
+  .chip i{width:9px;height:9px;border-radius:50%;background:var(--red);display:block}
+
+  /* headline */
+  .hero{position:absolute;left:64px;top:168px;right:64px}
+  .eyebrow{font-size:20px;font-weight:600;color:var(--ink2);letter-spacing:.01em;margin-bottom:14px}
+  h1{font-size:136px;line-height:.9;font-weight:800;letter-spacing:-.055em}
+  h1 .r{color:var(--red)}
+  h1 .o{font-weight:300;font-style:italic;letter-spacing:-.05em}
+  .wave{display:inline-block;transform:translateY(-8px)}
+
+  /* collage */
+  .collage{position:absolute;left:0;right:0;top:650px;height:520px}
+  .diamond{position:absolute;right:-120px;top:20px;width:500px;height:500px;border-radius:110px;transform:rotate(45deg);
+           background:linear-gradient(135deg,#ff3b3b,#c40808)}
+  .diamond2{position:absolute;right:420px;top:-20px;width:78px;height:78px;border-radius:20px;transform:rotate(45deg);background:#ff8f8f}
+  .card{position:absolute;background:#fff;border-radius:26px;box-shadow:0 1px 0 rgba(20,16,46,.04),0 24px 60px -12px rgba(20,16,46,.28);border:1px solid rgba(20,16,46,.06)}
+
+  /* overview card */
+  .ov{left:64px;top:40px;width:600px;height:400px;padding:26px 28px}
+  .bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+  .bar .t{font-size:19px;font-weight:800;letter-spacing:-.01em}
+  .bar .t small{display:block;font-size:13px;font-weight:500;color:var(--mute);margin-top:2px;letter-spacing:0}
+  .live{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:var(--green);background:var(--green-t);padding:7px 13px;border-radius:30px}
+  .live i{width:8px;height:8px;border-radius:50%;background:var(--green)}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+  .kpi{border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+  .kpi label{display:block;font-size:12px;font-weight:600;color:var(--mute);margin-bottom:6px}
+  .kpi b{font-size:30px;font-weight:800;letter-spacing:-.04em}
+  .kpi em{font-style:normal;font-size:12px;font-weight:700;color:var(--green);margin-left:6px}
+  .chart{position:relative}
+  .chart svg{display:block;width:100%;height:170px}
+
+  /* ticket card */
+  .tk{left:660px;top:0;width:476px;height:352px;padding:22px 24px;z-index:2}
+  .row{display:flex;align-items:center;gap:14px;padding:13px 0;border-top:1px solid var(--line)}
+  .row:first-of-type{border-top:0}
+  .av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex:none}
+  .row .m{flex:1;min-width:0}
+  .row .m b{display:block;font-size:15.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row .m span{font-size:12.5px;color:var(--mute);font-weight:500}
+  .tag{font-size:12px;font-weight:700;padding:6px 12px;border-radius:30px;white-space:nowrap}
+  .tag.ok{background:var(--green-t);color:var(--green)} .tag.wip{background:var(--lilac);color:var(--purple)} .tag.new{background:var(--red-t);color:var(--red-d)}
+
+  /* chat card */
+  .chat{left:500px;top:372px;width:460px;height:200px;padding:20px 22px;z-index:3;background:var(--ink);color:#fff;border:0}
+  .chat .who{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .chat .who b{font-size:15px}.chat .who span{display:block;font-size:12px;color:var(--lilac2);font-weight:500}
+  .msg{font-size:14.5px;line-height:1.35;padding:11px 15px;border-radius:18px;max-width:84%;font-weight:500}
+  .msg.a{background:#2b2459;border-bottom-left-radius:6px}
+  .msg.b{background:var(--red);margin:9px 0 0 auto;border-bottom-right-radius:6px;font-weight:600}
+  .stars{position:absolute;right:-22px;top:-30px;background:#ffd166;color:var(--ink);border-radius:20px;padding:12px 18px;font-weight:800;font-size:19px;letter-spacing:.06em;transform:rotate(4deg);box-shadow:0 14px 30px -8px rgba(0,0,0,.35)}
+
+  /* schedule */
+  .sched{position:absolute;left:64px;right:64px;top:1236px}
+  .sched h2{font-size:34px;font-weight:800;letter-spacing:-.03em;display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px}
+  .sched h2 span{font-size:15px;font-weight:600;color:var(--mute);letter-spacing:0}
+  .days{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .day{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px 18px 20px;min-height:208px;position:relative}
+  .day .d{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+  .day .d b{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);font-weight:800}
+  .ic{width:44px;height:44px;border-radius:14px;background:var(--red);display:flex;align-items:center;justify-content:center}
+  .ic svg{width:24px;height:24px}
+  .day h3{font-size:19px;line-height:1.15;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+  .day p{font-size:13.5px;line-height:1.4;color:var(--ink2);font-weight:500}
+  .day:nth-child(3){background:var(--ink);border-color:var(--ink)}
+  .day:nth-child(3) h3{color:#fff}.day:nth-child(3) p{color:var(--lilac2)}.day:nth-child(3) .d b{color:var(--lilac2)}
+  .day:nth-child(3) .ic{background:#fff}
+
+  /* footer */
+  .foot{position:absolute;left:0;right:0;bottom:0;height:152px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 64px;overflow:hidden}
+  .foot .big{font-size:38px;font-weight:800;letter-spacing:-.035em;line-height:1.05;position:relative;z-index:2}
+  .foot .big small{display:block;font-size:17px;font-weight:600;letter-spacing:0;opacity:.9;margin-top:8px}
+  .foot .hash{font-size:22px;font-weight:800;background:#fff;color:var(--red);border-radius:40px;padding:16px 28px;position:relative;z-index:2;letter-spacing:.02em}
+  .foot .sh{position:absolute;width:260px;height:260px;border-radius:60px;transform:rotate(45deg);background:rgba(255,255,255,.1);right:180px;top:-40px}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="dots"></div>
+
+  <div class="head">
+    <img src="edos_logo.png" style="mix-blend-mode:multiply" alt="Edos Centre – Embrace data for optimum solutions">
+    <div class="chip"><i></i>Customer Service Week 2026</div>
+  </div>
+
+  <div class="hero">
+    <div class="eyebrow">Celebrating the people behind every solution.</div>
+    <h1>Happy<br>Customer<br><span class="r">Service</span> <span class="o">Week</span></h1>
+  </div>
+
+  <div class="collage">
+    <div class="diamond"></div><div class="diamond2"></div>
+
+    <div class="card ov">
+      <div class="bar"><div class="t">Support overview<small>This week · all channels</small></div><div class="live"><i></i>Live</div></div>
+      <div class="kpis">
+        <div class="kpi"><label>Satisfaction</label><b>98%</b><em>▲ 4</em></div>
+        <div class="kpi"><label>First reply</label><b>2m</b><em>▼ 31%</em></div>
+        <div class="kpi"><label>Resolved</label><b>1,248</b><em>▲ 12%</em></div>
+      </div>
+      <div class="chart">
+        <svg viewBox="0 0 544 170" preserveAspectRatio="none">
+          <defs><linearGradient id="a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f20c0c" stop-opacity=".22"/><stop offset="1" stop-color="#f20c0c" stop-opacity="0"/></linearGradient></defs>
+          <g stroke="#e4dfd6" stroke-width="1"><line x1="0" y1="20" x2="544" y2="20"/><line x1="0" y1="70" x2="544" y2="70"/><line x1="0" y1="120" x2="544" y2="120"/><line x1="0" y1="168" x2="544" y2="168"/></g>
+          <path d="M0 130 C50 120 70 135 110 112 C160 84 190 112 236 92 C290 68 320 96 370 60 C420 26 460 52 544 18 L544 170 L0 170Z" fill="url(#a)"/>
+          <path d="M0 130 C50 120 70 135 110 112 C160 84 190 112 236 92 C290 68 320 96 370 60 C420 26 460 52 544 18" fill="none" stroke="#f20c0c" stroke-width="4" stroke-linecap="round"/>
+          <path d="M0 150 C60 146 90 140 140 138 C200 134 240 126 300 120 C360 112 420 104 544 90" fill="none" stroke="#3b2a86" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+          <circle cx="544" cy="18" r="7" fill="#fff" stroke="#f20c0c" stroke-width="4"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="card tk">
+      <div class="bar" style="margin-bottom:6px"><div class="t">Ticket queue</div><div class="tag wip">4 open</div></div>
+      <div class="row"><div class="av" style="background:#3b2a86">AO</div><div class="m"><b>Dashboard export not loading</b><span>Amara O. · 2 min ago</span></div><div class="tag ok">Resolved</div></div>
+      <div class="row"><div class="av" style="background:#f20c0c">KM</div><div class="m"><b>Need help with monthly report</b><span>Kelvin M. · 6 min ago</span></div><div class="tag wip">In progress</div></div>
+      <div class="row"><div class="av" style="background:#14102e">ZN</div><div class="m"><b>Add a new user to the team</b><span>Zawadi N. · 11 min ago</span></div><div class="tag ok">Resolved</div></div>
+      <div class="row"><div class="av" style="background:#13a56b">JB</div><div class="m"><b>Question about data sources</b><span>James B. · just now</span></div><div class="tag new">New</div></div>
+    </div>
+
+    <div class="card chat">
+      <div class="stars">★★★★★</div>
+      <div class="who"><div class="av" style="background:var(--red)">E</div><div><b>Edos Support</b><span>● Online</span></div></div>
+      <div class="msg a">Thanks for your patience — your report is ready 🎉</div>
+      <div class="msg b">You're a lifesaver. Thank you!</div>
+    </div>
+  </div>
+
+  <section class="sched">
+    <h2>This week at Edos <span>Five days of thank-yous</span></h2>
+    <div class="days">
+      <div class="day"><div class="d"><b>Mon</b><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M16 11h2a2 2 0 0 1 0 5h-2"/><path d="M8 3v3M12 3v3"/></svg></div></div><h3>Coffee &amp; Connect</h3><p>Start the week with the team over something warm.</p></div>
+      <div class="day"><div class="d"><b>Tue</b><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></div></div><h3>Data Trivia</h3><p>Quiz time on numbers, charts and insights.</p></div>
+      <div class="day"><div class="d"><b>Wed</b><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#f20c0c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg></div></div><h3>Thank-You Wall</h3><p>Leave a note for a colleague who made your day.</p></div>
+      <div class="day"><div class="d"><b>Thu</b><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2.5" y="13" width="4" height="6" rx="1.5"/><rect x="17.5" y="13" width="4" height="6" rx="1.5"/></svg></div></div><h3>Wear Red Day</h3><p>Show your Edos colours with pride.</p></div>
+      <div class="day"><div class="d"><b>Fri</b><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.3 6.100 20.500l1.200-6.500L2.500 9.400l6.600-.9z"/></svg></div></div><h3>Solution Star Awards</h3><p>Celebrating our champions of great service.</p></div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <div class="sh"></div>
+    <div class="big">Thank you for embracing data<br>and delighting every customer.<small>Embrace data for optimum solutions.</small></div>
+    <div class="hash">#CSWeek</div>
+  </div>
+</div>
+</body>
+</html>
